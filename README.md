@@ -1,4 +1,4 @@
-# Spandanaforchange NGO Website
+# BNYF NGO Website
 
 A complete 7-page website for the Spandanaforchange NGO organization, built with HTML, CSS, and JavaScript.
 
