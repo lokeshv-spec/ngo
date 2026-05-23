@@ -184,12 +184,85 @@
             color: #999;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 768px) {
+            #admin-header {
+                padding: 1.25rem 1rem;
+            }
+
+            #admin-header h1 {
+                font-size: 1.35rem;
+                line-height: 1.2;
+            }
+
+            #admin-container {
+                margin: 1rem auto;
+                padding: 0 0.75rem;
+            }
+
+            #stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1rem;
+            }
+
+            #stat-box,
+            #tab-content {
+                padding: 1rem;
+            }
+
+            #stat-number {
+                font-size: 1.8rem;
+            }
+
+            #action-buttons,
+            #tabs {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            #action-buttons {
+                gap: 0.75rem;
+            }
+
+            #btn,
+            #tab-btn {
+                flex: 0 0 auto;
+                white-space: nowrap;
+            }
+
+            #tab-content.active {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 680px;
+            }
+
+            th, td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #admin-header h1 {
+                font-size: 1.15rem;
+            }
+
+            #btn {
+                padding: 0.7rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- ADMIN HEADER -->
     <header id="admin-header">
-        <h1>📊 Spandanaforchange Admin Dashboard</h1>
+        <h1>📊 BHARATH NAVA YUVA ASSOCIATION Admin Dashboard</h1>
         <p>Manage donations, volunteers, and communications</p>
     </header>
 
@@ -257,7 +330,7 @@
     </div>
 
     <footer id="footer-admin">
-        <p>&copy; 2024 Spandanaforchange. Admin Dashboard. For authorized use only.</p>
+        <p>&copy; 2024 BHARATH NAVA YUVA ASSOCIATION. Admin Dashboard. For authorized use only.</p>
     </footer>
 
     <script src="js/backend.js"></script>

@@ -21,6 +21,16 @@ body {
     background-color: var(--white);
     color: var(--dark-gray);
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img, svg, video, canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    overflow-wrap: anywhere;
 }
 
 body.loading-active {
@@ -180,6 +190,7 @@ body.loading-active {
     font-weight: bold;
     color: var(--primary-teal);
     text-decoration: none;
+    line-height: 1.1;
 }
 
 #nav-links {
@@ -259,6 +270,22 @@ body.loading-active {
     margin-bottom: 3rem;
     letter-spacing: -2px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#hero-title {
+    font-size: clamp(2rem, 7vw, 4.5rem);
+    line-height: 1.1;
+    max-width: 960px;
+}
+
+#hero-title:not(.hero-title-spaced) {
+    margin-bottom: 1rem;
+}
+
+#hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    max-width: 760px;
+    margin: 0 auto;
 }
 
 .title-line {
@@ -448,6 +475,14 @@ body.loading-active {
     opacity: 0.8;
 }
 
+.section-intro {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
 #section-subtitle {
     font-size: 1.1rem;
     color: var(--dark-gray);
@@ -509,6 +544,17 @@ body.loading-active {
 #program-image {
     width: 100%;
     height: 200px;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-teal);
+    font-size: 3rem;
+}
+
+.program-image {
+    width: 100%;
+    min-height: 180px;
     background-color: var(--light-gray);
     display: flex;
     align-items: center;
@@ -748,7 +794,9 @@ body.loading-active {
     font-weight: 600;
 }
 
-#form-input, #form-textarea, #form-select {
+#form-input, .form-input,
+#form-textarea, .form-textarea,
+#form-select, .form-select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-gray);
@@ -758,13 +806,15 @@ body.loading-active {
     transition: border-color 0.3s ease;
 }
 
-#form-input:focus, #form-textarea:focus, #form-select:focus {
+#form-input:focus, .form-input:focus,
+#form-textarea:focus, .form-textarea:focus,
+#form-select:focus, .form-select:focus {
     outline: none;
     border-color: var(--primary-teal);
     box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.1);
 }
 
-#form-textarea {
+#form-textarea, .form-textarea {
     resize: vertical;
     min-height: 120px;
 }
@@ -1015,6 +1065,7 @@ body.loading-active {
     background-color: var(--light-gray);
     padding: 2rem;
     border-radius: 8px;
+    overflow-x: auto;
 }
 
 #chart {
@@ -1036,6 +1087,8 @@ body.loading-active {
     font-weight: bold;
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 /* ========== CONFIRMATION MESSAGES ========== */
@@ -1061,8 +1114,23 @@ body.loading-active {
 /* ========== RESPONSIVE DESIGN ========== */
 
 @media (max-width: 768px) {
-    .hero-title-spaced {
+    body {
+        font-size: 0.98rem;
+    }
+
+    #navbar {
+        padding: 0.85rem 1rem;
+        position: relative;
+    }
+
+    #logo {
+        max-width: calc(100% - 56px);
+        font-size: 1.15rem;
+    }
+
+    #hero-title.hero-title-spaced {
         font-size: 2.5rem;
+        letter-spacing: 0;
     }
 
     .hero-tagline-text {
@@ -1092,17 +1160,20 @@ body.loading-active {
     #hero {
         min-height: 500px;
         padding: 3rem 1.5rem;
+        background-attachment: scroll;
     }
 
     #nav-links {
         display: none;
         position: absolute;
-        top: 70px;
+        top: 100%;
         left: 0;
         right: 0;
         flex-direction: column;
         background-color: var(--white);
         gap: 0;
+        box-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
+        z-index: 1001;
     }
 
     #nav-links.active {
@@ -1116,18 +1187,79 @@ body.loading-active {
 
     #mobile-toggle {
         display: block;
+        flex-shrink: 0;
     }
 
     #section-title {
         font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #impact-section, #programs-section, #testimonials-section,
+    #donation-section, #volunteer-section, #transparency-section,
+    #contact-section, #about-section, #journey-section,
+    #donation-progress-section, #mission-intro-section,
+    #cta-banner, #footer {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    #contact-form, #donation-form, #volunteer-form {
+        padding: 1.25rem;
+        margin: 1.5rem auto;
     }
 
     #impact-counters {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
     }
 
     #programs-grid {
         grid-template-columns: 1fr;
+    }
+
+    #vision-mission,
+    #team-grid,
+    #transparency-stats,
+    #testimonials-grid,
+    .story-grid,
+    .mission-list {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    #contact-section > div,
+    #programs-section > div[style*="grid-template-columns"],
+    #volunteer-section > div[style*="grid-template-columns"],
+    #donation-section > div[style*="grid-template-columns"],
+    #transparency-section > div[style*="grid-template-columns"],
+    #impact-section > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+
+    #volunteer-section > div,
+    #donation-section > div,
+    #transparency-section > div,
+    #contact-section > div,
+    #impact-section > div {
+        max-width: 100% !important;
+    }
+
+    #volunteer-section [style*="padding: 2rem"],
+    #donation-section [style*="padding: 2rem"],
+    #transparency-section [style*="padding: 2rem"],
+    #contact-section [style*="padding: 2rem"],
+    #impact-section [style*="padding: 2rem"] {
+        padding: 1.25rem !important;
+    }
+
+    #chart {
+        min-width: 520px;
+    }
+
+    #chart-bar {
+        font-size: 0.78rem;
     }
 
     #donation-amounts {
@@ -1137,23 +1269,76 @@ body.loading-active {
     #footer-content {
         grid-template-columns: 1fr;
     }
+
+    #social-links {
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 480px) {
     #navbar {
-        padding: 1rem;
+        padding: 0.8rem 1rem;
+    }
+
+    #logo {
+        font-size: 1rem;
     }
 
     #hero {
+        min-height: 420px;
         padding: 3rem 1rem;
     }
 
     #hero-title {
-        font-size: 1.5rem;
+        font-size: 2rem;
+    }
+
+    #hero-title.hero-title-spaced {
+        font-size: 2rem;
+    }
+
+    .loader-sides {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .loader-sides::before {
+        display: none;
+    }
+
+    .loader-side,
+    .loader-side:first-child,
+    .loader-side:last-child {
+        text-align: center;
+    }
+
+    .loader-side {
+        font-size: clamp(2.5rem, 16vw, 4rem);
+    }
+
+    .spinner-content {
+        padding: 1rem;
     }
 
     #section-title {
-        font-size: 1.5rem;
+        font-size: 1.65rem;
+    }
+
+    .journey-content h2,
+    #cta-banner-title {
+        font-size: 1.65rem;
+    }
+
+    .counter-number {
+        font-size: 2rem;
+    }
+
+    .impact-card,
+    .story-card,
+    #testimonial-card,
+    #vm-card,
+    #stat-card {
+        padding: 1.25rem;
     }
 
     #impact-counters {
@@ -1162,5 +1347,23 @@ body.loading-active {
 
     #donation-amounts {
         grid-template-columns: 1fr;
+    }
+
+    #chart-container {
+        padding: 1rem;
+    }
+
+    #chart {
+        min-width: 440px;
+        height: 240px;
+        gap: 0.6rem;
+    }
+
+    #footer {
+        text-align: left;
+    }
+
+    #footer-bottom {
+        font-size: 0.8rem;
     }
 }

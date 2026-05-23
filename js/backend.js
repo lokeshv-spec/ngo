@@ -187,15 +187,15 @@ class Backend {
         const templates = {
             volunteer_confirmation: {
                 subject: 'Thank You for Registering as a Volunteer',
-                body: `Dear ${data.name},\n\nThank you for registering as a volunteer with Spandanaforchange. We're excited to have you join our community.\n\nWe will review your profile and contact you within 2-3 business days with available opportunities.\n\nBest regards,\nSpandanaforchange Team`
+                body: `Dear ${data.name},\n\nThank you for registering as a volunteer with BHARATH NAVA YUVA ASSOCIATION. We're excited to have you join our community.\n\nWe will review your profile and contact you within 2-3 business days with available opportunities.\n\nBest regards,\nBHARATH NAVA YUVA ASSOCIATION Team`
             },
             donation_confirmation: {
-                subject: 'Donation Receipt - Spandanaforchange',
-                body: `Dear ${data.name},\n\nThank you for your generous donation of ₹${data.amount}. Your contribution will help us create lasting impact.\n\nTransaction ID: ${data.id}\nDate: ${new Date(data.timestamp).toLocaleDateString()}\n\nBest regards,\nSpandanaforchange Team`
+                subject: 'Donation Receipt - BHARATH NAVA YUVA ASSOCIATION',
+                body: `Dear ${data.name},\n\nThank you for your generous donation of ₹${data.amount}. Your contribution will help us create lasting impact.\n\nTransaction ID: ${data.id}\nDate: ${new Date(data.timestamp).toLocaleDateString()}\n\nBest regards,\nBHARATH NAVA YUVA ASSOCIATION Team`
             },
             contact_acknowledgment: {
                 subject: 'We Received Your Message',
-                body: `Dear ${data.name},\n\nThank you for contacting Spandanaforchange. We have received your message and will respond within 24-48 hours.\n\nBest regards,\nSpandanaforchange Team`
+                body: `Dear ${data.name},\n\nThank you for contacting BHARATH NAVA YUVA ASSOCIATION. We have received your message and will respond within 24-48 hours.\n\nBest regards,\nBHARATH NAVA YUVA ASSOCIATION Team`
             }
         };
         return templates[type] || null;
