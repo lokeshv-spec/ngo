@@ -1,5 +1,67 @@
 // ========== SHARED UTILITIES ==========
 
+function initLoadingIntro() {
+    const loader = document.getElementById('loading-spinner');
+    if (!loader) {
+        return;
+    }
+
+    const isHomePage = /(^|\/)index\.html$/.test(window.location.pathname) || window.location.pathname === '/' || window.location.pathname.endsWith('/NGO/');
+    const navigationEntry = performance.getEntriesByType('navigation')[0];
+    const isReload = navigationEntry && navigationEntry.type === 'reload';
+    const hasSeenLoader = sessionStorage.getItem('homeLoaderSeen') === 'true';
+    const shouldShowLoader = isHomePage && (!hasSeenLoader || isReload);
+    const scrollToHero = () => {
+        const hero = document.getElementById('hero');
+        if (hero) {
+            hero.scrollIntoView({ block: 'start' });
+        }
+    };
+
+    if (!shouldShowLoader) {
+        loader.classList.add('fade-out');
+        document.body.classList.remove('loading-active');
+        scrollToHero();
+        return;
+    }
+
+    document.body.classList.add('loading-active');
+
+    const hideLoader = () => {
+        window.setTimeout(() => {
+            loader.classList.add('fade-out');
+            document.body.classList.remove('loading-active');
+            sessionStorage.setItem('homeLoaderSeen', 'true');
+            scrollToHero();
+        }, 10000);
+    };
+
+    if (document.readyState === 'complete') {
+        hideLoader();
+    } else {
+        window.addEventListener('load', hideLoader, { once: true });
+    }
+}
+
+function scrollToHeroSection() {
+    const hero = document.getElementById('hero');
+    if (hero) {
+        hero.scrollIntoView({ block: 'start' });
+    }
+}
+
+function initReloadHeroScroll() {
+    const navigationEntry = performance.getEntriesByType('navigation')[0];
+    const isReload = navigationEntry && navigationEntry.type === 'reload';
+    const hasLoader = Boolean(document.getElementById('loading-spinner'));
+
+    if (!isReload || hasLoader) {
+        return;
+    }
+
+    window.setTimeout(scrollToHeroSection, 0);
+}
+
 // Navigate to different pages
 function navigateTo(page) {
     window.location.href = `${page}.html`;
@@ -112,6 +174,8 @@ function showMessage(message, type = 'success') {
 
 // Initialize page on load
 document.addEventListener('DOMContentLoaded', function() {
+    initLoadingIntro();
+    initReloadHeroScroll();
     initMobileMenu();
     initSmoothScroll();
     initCounters();
